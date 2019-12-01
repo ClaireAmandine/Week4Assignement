@@ -9,7 +9,7 @@ http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartpho
 
 The original data was tidied up further for analysis and can be found in "tidy_data.Rdata".
 
-The resulting tidy dataset was used to calculate the mean of each selected features over all participants.
+The resulting tidy dataset was used to calculate the mean of each selected features per activity and per participants.
 The resulting file "tidy_data_average.txt" contains the following:
 
 
@@ -143,5 +143,5 @@ fBodyGyroJerkMag
 The mean and standard deviation calculated from these features are coded as follows:
 mean: Mean value
 std: Standard deviation
-Note: the values in the "tidy_data_average" set are thus the average values of the mean, resp. standard deviation over the 30 participants.
+Note: the values in the "tidy_data_average" set are thus the average values of the mean, resp. standard deviation per activity and per participant.
 
