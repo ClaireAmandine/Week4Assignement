@@ -2,7 +2,7 @@ Background:
 ==========
 Data originated from an experiments where activities from 30 volunteers where measured using the accelerometers and gyrometers from the Samsung Galaxy S smartphone. 
 Volunteers performed 5 type of activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) during which the data was collected.
-Subsequently, the data was pre-processed and labbeled w.r.t the different activities.
+Subsequently, the data was pre-processed and labeled w.r.t the different activities.
 
 A full description is available at the site where the data was obtained:
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones 
