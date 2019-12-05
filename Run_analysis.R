@@ -8,7 +8,7 @@ test_dir <-  './test'
 
 setwd(root_dir) 
 
-### 1. Merges the training and the test sets to create one data set
+### 1. Merges raw training and test sets to create one data set
 
 ## read features names
 setwd(main_dir) 
@@ -20,7 +20,6 @@ training_data <- read.table(file="X_train.txt",header=FALSE)
 training_label <- read.table(file="y_train.txt")
 training_subject <- read.table(file="subject_train.txt")
 setwd(main_dir) 
-
 
 # create empty table
 training = data.frame(matrix("", ncol = 563, nrow = 7352) )
@@ -69,9 +68,7 @@ data <- bind_rows(training,test)
 
 ### 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
 temp <- as.numeric(c(grep('mean\\()',features$V2),grep('std\\()',features$V2)))
-
 feature_select <- temp[order(temp)]
-
 data2 <- select(data,set,subject,activity,as.character(feature_select))
 
 
@@ -79,33 +76,27 @@ data2 <- select(data,set,subject,activity,as.character(feature_select))
 ### 3. Uses descriptive activity names to name the activities in the data set
 activity_label <- read.table(file="activity_labels.txt")
 activity_label <- rename(activity_label,activity=V1,activity_name=V2)
-
 tidy_data <- data2 %>% merge(activity_label,by="activity") %>% arrange(desc(set),subject,activity) %>%  select(set,subject,activity,activity_name,'1':'543')
 
 
 
 ### 4. Appropriately labels the data set with descriptive variable names () 
-
 varnames <- gsub("-","_",features[feature_select,2]) #replace unwanted/untidy characters
 varnames <- gsub("\\()","",varnames)
-
 names(tidy_data )[5:70] <- varnames 
 
 
 
 ### 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-
 by_activity <- group_by(tidy_data,set,subject,activity, activity_name) 
 average_tidy_data <- summarize_all(by_activity,"mean",na.rm=TRUE)
 average_tidy_data <- arrange(result,desc(set),subject,activity)
 
 ### Output
-
 if (!file.exists("Output")) {dir.create("Output")}
 setwd("./Output")
 
-write.table(tidy_data,file="tidy_data.txt",sep=' ',quote=FALSE)
-#write.table(average_tidy_data,file="tidy_data_average.txt",sep=' ',quote=FALSE)
+write.table(tidy_data,file="tidy_data.txt",quote=FALSE)
 write.table(average_tidy_data,file="tidy_data_average.txt",row.names = FALSE,quote=FALSE)
 
 
